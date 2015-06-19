@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:p="http://www.springframework.org/schema/p"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<context:property-placeholder location="classpath:/META-INF/spring/**.properties" />
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
@@ -30,10 +35,47 @@
             </list>
         </property>
     </bean>
-	
+    
 	<context:component-scan base-package="com.medcloud.web" />
 	
 	<mvc:default-servlet-handler/>
+
+    <bean 	id="dataSource"
+    		class="org.apache.commons.dbcp.BasicDataSource"
+    		destroy-method="close"
+    		p:driverClassName="${db.driverClassName}"
+    		p:url="${db.host}"
+    		p:username="${db.username}"
+    		p:password="${db.password}"
+    		p:validationQuery="SELECT 1 FROM DUAL"
+    		p:initialSize="10"
+    		p:testOnBorrow="true"
+    		/>
+    
+	<!-- Configurando o transaction manager que irá controlar as transações -->
+	<bean 	id="transactionManager"
+			class="org.springframework.orm.jpa.JpaTransactionManager"
+			p:entityManagerFactory-ref="entityManagerFactory" />
 	
+	<bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaVendorAdapter" ref="hibernateVendor"></property>
+		<property name="packagesToScan" value="br.com.itpex"></property>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="jpaPropertyMap">
+			<props>
+	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+		        <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+		        <prop key="hibernate.connection.charSet">UTF-8</prop>
+		        <prop key="hibernate.id.new_generator_mappings">true</prop>
+		        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+		        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+		        <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+			</props>
+		</property>
+	</bean> 
+	   
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>

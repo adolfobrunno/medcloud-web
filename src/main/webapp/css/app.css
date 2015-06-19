@@ -1,0 +1,51 @@
+@CHARSET "ISO-8859-1";
+
+.header-full-title{
+	width: 60%!important;
+}
+
+header i{
+	line-height: 2 !important;
+}
+
+#title-link{
+	padding-right: 10px;
+}
+
+.header-full-title p{
+	text-align: left!important;
+}
+
+#footer-widgets{
+	background-color: #A69E9E;
+	color: #FFFFFF;	
+}
+#footer-widgets .social-icon-ar{
+	margin-right: 0px;
+}
+#footer-widgets .media-heading{
+	padding-top: 10px;
+}
+#footer-widgets .media{
+	padding-bottom: 15px;
+}
+
+#login-form .form-control{
+	height: 42px;
+}
+
+#div-descricoes .fa{
+	line-height: 2.2 !important;
+}
+
+#div-descricoes .right-line{
+	position: inherit;
+}
+
+/* .header-full-title{ */
+/* 	background-image: url("../img/logo.jpg"); */
+/* } */
+
+/* .services-header{ */
+/* 	background-image: url("../img/doctor01.jpg"); */
+/* } */

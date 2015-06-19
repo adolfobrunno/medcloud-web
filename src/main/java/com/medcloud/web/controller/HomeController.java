@@ -1,4 +1,4 @@
-package com.medcloud.web;
+package com.medcloud.web.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -34,6 +34,12 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		
+		return "login";
 	}
 	
 }

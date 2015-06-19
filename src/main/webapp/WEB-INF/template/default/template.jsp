@@ -2,7 +2,7 @@
 <html>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Default tiles template</title>
+    <title>MedCloud</title>
     
     <!-- Template CSS -->
     <link href="tools/template/assets/css/preload.css" rel="stylesheet" media="screen" />
@@ -16,7 +16,7 @@
     <link href="tools/template/assets/css/jquery.bxslider.css" rel="stylesheet"/>
     <link href="tools/template/assets/css/syntaxhighlighter/shCore.css" rel="stylesheet" media="screen"/>
 
-    <link href="tools/template/assets/css/style-blue.css" rel="stylesheet" media="screen" title="default"/>
+    <link href="tools/template/assets/css/style-green.css" rel="stylesheet" media="screen" title="default"/>
     <link href="tools/template/assets/css/width-full.css" rel="stylesheet" media="screen" title="default"/>
 
     <link href="tools/template/assets/css/buttons.css" rel="stylesheet" media="screen"/>
@@ -24,6 +24,7 @@
     
     
     <link href="css/geral.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="page">
