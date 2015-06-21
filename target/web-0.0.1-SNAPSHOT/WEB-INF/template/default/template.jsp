@@ -2,62 +2,61 @@
 <html>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Default tiles template</title>
-    <style type="text/css">
-    body {
-        margin:0px;
-        padding:0px;
-        height:100%;
-        overflow:hidden;
-    }
- 
-    .page {
-        min-height:100%;
-        position:relative;
-    }
-     
-    .header {
-        padding:10px;
-        width:100%;
-        text-align:center;
-    }
-     
-    .content {
-            padding:10px;
-            padding-bottom:20px; /* Height of the footer element */
-            overflow:hidden;
-    }
-     
-    .menu {
-        padding:50px 10px 0px 10px;
-        width:200px;
-        float:left;
-    }
- 
-    .body {
-        margin:50px 10px 0px 250px;
-    }
-     
-    .footer {
-        clear:both;
-        position:absolute;
-        bottom:0;
-        left:0;
-        text-align:center;
-        width:100%;
-        height:20px;
-    }
-     
-    </style>
+    <title>MedCloud</title>
+    
+    <!-- Template CSS -->
+    <link href="tools/template/assets/css/preload.css" rel="stylesheet" media="screen" />
+    <link href="tools/template/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/yamm.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/bootstrap-switch.min.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/font-awesome.min.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/animate.min.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/slidebars.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/lightbox.css" rel="stylesheet" media="screen"/>
+    <link href="tools/template/assets/css/jquery.bxslider.css" rel="stylesheet"/>
+    <link href="tools/template/assets/css/syntaxhighlighter/shCore.css" rel="stylesheet" media="screen"/>
+
+    <link href="tools/template/assets/css/style-green.css" rel="stylesheet" media="screen" title="default"/>
+    <link href="tools/template/assets/css/width-full.css" rel="stylesheet" media="screen" title="default"/>
+
+    <link href="tools/template/assets/css/buttons.css" rel="stylesheet" media="screen"/>
+    <!-- End template CSS imports -->
+    
+    
+    <link href="css/geral.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="page">
         <tiles:insertAttribute name="header" />
         <div class="content">
-            <tiles:insertAttribute name="menu" />
             <tiles:insertAttribute name="body" />
         </div>
         <tiles:insertAttribute name="footer" />
     </div>
+    
+    
+    <!-- Template Scripts -->
+    
+    <script src="tools/template/assets/js/jquery.min.js"></script>
+	<script src="tools/template/assets/js/jquery.cookie.js"></script>
+	<script src="tools/template/assets/js/bootstrap.min.js"></script>
+	<script src="tools/template/assets/js/bootstrap-switch.min.js"></script>
+	<script src="tools/template/assets/js/wow.min.js"></script>
+	<script src="tools/template/assets/js/slidebars.js"></script>
+	<script src="tools/template/assets/js/jquery.bxslider.min.js"></script>
+	<script src="tools/template/assets/js/holder.js"></script>
+	<script src="tools/template/assets/js/buttons.js"></script>
+	<script src="tools/template/assets/js/styleswitcher.js"></script>
+	<script src="tools/template/assets/js/jquery.mixitup.min.js"></script>
+	<script src="tools/template/assets/js/circles.min.js"></script>
+	
+	<!-- Syntaxhighlighter -->
+	<script src="tools/template/assets/js/syntaxhighlighter/shCore.js"></script>
+	<script src="tools/template/assets/js/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="tools/template/assets/js/syntaxhighlighter/shBrushJScript.js"></script>
+	
+	<script src="tools/template/assets/js/app.js"></script>
+    
 </body>
 </html>

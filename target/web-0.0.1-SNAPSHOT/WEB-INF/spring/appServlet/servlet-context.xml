@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<context:property-placeholder location="classpath:/META-INF/spring/**.properties" />
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<mvc:annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/> 
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	    <property name="order" value="0"/>
+	</bean> 
+	 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
 	
 	 <!-- Tiles configuration -->
+ 
     <bean id="tilesConfigurer"
         class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
         <property name="definitions">
@@ -30,9 +43,76 @@
             </list>
         </property>
     </bean>
+    
+	<context:component-scan base-package="com.medcloud">
+	</context:component-scan>
 	
-	<context:component-scan base-package="com.medcloud.web" />
+	<mvc:default-servlet-handler/>
+
+<!--     <bean 	id="dataSource" -->
+<!--     		class="org.apache.commons.dbcp.BasicDataSource" -->
+<!--     		destroy-method="close" -->
+<!--     		p:driverClassName="${db.driverClassName}" -->
+<!--     		p:url="${db.host}" -->
+<!--     		p:username="${db.username}" -->
+<!--     		p:password="${db.password}" -->
+<!--     		p:validationQuery="SELECT 1 FROM DUAL" -->
+<!--     		p:initialSize="10" -->
+<!--     		p:testOnBorrow="true" -->
+<!--     		/> -->
+    		
+    	<mongo:mongo host="127.0.0.1" port="27017" />
+		<mongo:db-factory dbname="medcloud" />
+	 
+		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		</bean>
+    
+<!-- 	Configurando o transaction manager que irá controlar as transações -->
+<!-- 	<bean 	id="transactionManager" -->
+<!-- 			class="org.springframework.orm.jpa.JpaTransactionManager" -->
+<!-- 			p:entityManagerFactory-ref="entityManagerFactory" /> -->
 	
+<!-- 	<bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/> -->
+
+<!-- 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
+<!-- 		<property name="jpaVendorAdapter" ref="hibernateVendor"></property> -->
+<!-- 		<property name="packagesToScan" value="br.com.itpex"></property> -->
+<!-- 		<property name="dataSource" ref="dataSource"></property> -->
+<!-- 		<property name="jpaPropertyMap"> -->
+<!-- 			<props> -->
+<!-- 	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
+<!-- 		        <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> -->
+<!-- 		        <prop key="hibernate.connection.charSet">UTF-8</prop> -->
+<!-- 		        <prop key="hibernate.id.new_generator_mappings">true</prop> -->
+<!-- 		        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop> -->
+<!-- 		        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop> -->
+<!-- 		        <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean>  -->
+
+	<!-- Configuração para chamada de serviços REST -->
+	<bean id="httpComponentsClientHttpRequestFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory"/>
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+	    <constructor-arg ref="httpComponentsClientHttpRequestFactory"/>
+
+	     <property name="messageConverters">
+	        <list>
+	            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+	                <property name="marshaller" ref="jaxbMarshaller"/>
+	                <property name="unmarshaller" ref="jaxbMarshaller"/>
+	            </bean>
+	            <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+	            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+	            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+	        </list>
+	    </property>
+	</bean>
+	<bean id = "jaxbMarshaller" class = "org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="packagesToScan" value="com.medcloud"/>
+    </bean>
+	   
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-	
-</beans:beans>
+</beans>

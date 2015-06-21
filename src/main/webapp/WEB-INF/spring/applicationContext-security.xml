@@ -21,20 +21,29 @@
 							http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
 
+	<import resource="/appServlet/servlet-context.xml"/>
+
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/api/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/user" access="ROLE_USER" />
 		
 		<security:form-login login-page="/login" default-target-url="/user" authentication-failure-url="/login?login_error=1" />
 	</security:http>
+	
+	<bean id="customUserDetailsService" depends-on="mongoTemplate" class="com.medcloud.config.security.CustomUserDetailsService"/>
  
 	<security:authentication-manager>
-	  <security:authentication-provider>
-	  <security:password-encoder hash="md5"/>
-	    <security:user-service>
-			<security:user name="medcloud" password="b0601e907c1fe805870dd9b43298aca0" authorities="ROLE_USER" />
-	    </security:user-service>
-	  </security:authentication-provider>
+	  <security:authentication-provider ref="daoAuthenticationProvider"/>
 	</security:authentication-manager>
+	
+	<bean 	id="userDetailsService" class="com.medcloud.config.security.CustomUserDetailsService"/>
+	
+	<bean id="daoAuthenticationProvider" class="com.medcloud.config.security.CustomAuthenticationProvider">
+      <property name="userDetailsService" ref="userDetailsService"/>
+      <property name="passwordEncoder">
+        <ref bean="passwordEncoder" />
+      </property>
+  	</bean>
 	
 </beans>
