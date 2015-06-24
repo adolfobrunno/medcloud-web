@@ -49,49 +49,13 @@
 	
 	<mvc:default-servlet-handler/>
 
-<!--     <bean 	id="dataSource" -->
-<!--     		class="org.apache.commons.dbcp.BasicDataSource" -->
-<!--     		destroy-method="close" -->
-<!--     		p:driverClassName="${db.driverClassName}" -->
-<!--     		p:url="${db.host}" -->
-<!--     		p:username="${db.username}" -->
-<!--     		p:password="${db.password}" -->
-<!--     		p:validationQuery="SELECT 1 FROM DUAL" -->
-<!--     		p:initialSize="10" -->
-<!--     		p:testOnBorrow="true" -->
-<!--     		/> -->
-    		
-    	<mongo:mongo host="127.0.0.1" port="27017" />
-		<mongo:db-factory dbname="medcloud" />
-	 
-		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
-		</bean>
+   	<mongo:mongo host="${db.url}" port="${db.port}" />
+	<mongo:db-factory dbname="${db.name}" />
+ 
+	<bean id="mongoTemplate" name="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
     
-<!-- 	Configurando o transaction manager que irá controlar as transações -->
-<!-- 	<bean 	id="transactionManager" -->
-<!-- 			class="org.springframework.orm.jpa.JpaTransactionManager" -->
-<!-- 			p:entityManagerFactory-ref="entityManagerFactory" /> -->
-	
-<!-- 	<bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/> -->
-
-<!-- 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> -->
-<!-- 		<property name="jpaVendorAdapter" ref="hibernateVendor"></property> -->
-<!-- 		<property name="packagesToScan" value="br.com.itpex"></property> -->
-<!-- 		<property name="dataSource" ref="dataSource"></property> -->
-<!-- 		<property name="jpaPropertyMap"> -->
-<!-- 			<props> -->
-<!-- 	            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
-<!-- 		        <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> -->
-<!-- 		        <prop key="hibernate.connection.charSet">UTF-8</prop> -->
-<!-- 		        <prop key="hibernate.id.new_generator_mappings">true</prop> -->
-<!-- 		        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop> -->
-<!-- 		        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop> -->
-<!-- 		        <prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop> -->
-<!-- 			</props> -->
-<!-- 		</property> -->
-<!-- 	</bean>  -->
-
 	<!-- Configuração para chamada de serviços REST -->
 	<bean id="httpComponentsClientHttpRequestFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory"/>
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
@@ -114,5 +78,21 @@
     </bean>
 	   
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean 	id="bcProvider" 			class="org.bouncycastle.jce.provider.BouncyCastleProvider" />
+  	<bean 	id="randomSaltGenerator" 	class="org.jasypt.salt.RandomSaltGenerator" />
+
+	<bean 	id="jasyptPasswordDigester"
+			class="org.jasypt.digest.PooledStringDigester"
+			p:poolSize="8"
+			p:algorithm="SHA-256"
+			p:iterations="2000"
+			p:saltSizeBytes="13"
+			p:provider-ref="bcProvider"
+			p:saltGenerator-ref="randomSaltGenerator" />
+			
+	<bean 	id="passwordEncoder"
+			class="org.jasypt.spring.security3.PasswordEncoder"
+			p:stringDigester-ref="jasyptPasswordDigester" />
 	
 </beans>
