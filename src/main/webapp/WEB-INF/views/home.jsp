@@ -106,8 +106,6 @@
 		            </div>
 	            </div>
             </section>
-			
-		
 		</div>
  	</tiles:putAttribute>
  </tiles:insertDefinition>

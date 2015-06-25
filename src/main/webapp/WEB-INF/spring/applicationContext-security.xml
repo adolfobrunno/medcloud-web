@@ -28,7 +28,7 @@
 		<security:intercept-url pattern="/api/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/user" access="ROLE_USER" />
 		
-		<security:form-login login-page="/login" default-target-url="/user" authentication-failure-url="/login?login_error=1" />
+		<security:form-login login-page="/login" default-target-url="/images" authentication-failure-url="/login?login_error=1" />
 	</security:http>
 	
 	<bean id="customUserDetailsService" depends-on="mongoTemplate" class="com.medcloud.config.security.CustomUserDetailsService"/>

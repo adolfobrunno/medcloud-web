@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Artificial Reason</title>
+    <title>MedSave</title>
 
     <link rel="shortcut icon" href="img/favicon.png">
 
@@ -27,16 +27,13 @@
     <link href="tools/template/assets/css/jquery.bxslider.css" rel="stylesheet">
     <link href="tools/template/assets/css/syntaxhighlighter/shCore.css" rel="stylesheet" media="screen">
 
-    <link href="tools/template/assets/css/style-blue.css" rel="stylesheet" media="screen" title="default">
+    <link href="tools/template/assets/css/style-green.css" rel="stylesheet" media="screen" title="default">
     <link href="tools/template/assets/css/width-full.css" rel="stylesheet" media="screen" title="default">
 
     <link href="tools/template/assets/css/buttons.css" rel="stylesheet" media="screen">
+    
+    <link href="css/login.css" rel="stylesheet" media="screen">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="js/html5shiv.min.js"></script>
-        <script src="js/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <!-- Preloader -->
@@ -49,16 +46,9 @@
 <div class="paper-back-full">
     <div class="login-form-full">
         <div class="fix-box">
-            <div class="text-center title-logo animated fadeInDown animation-delay-5">artificial<span>reason</span></div>
-            <div class="transparent-div no-padding animated fadeInUp animation-delay-8">
-                <ul class="nav nav-tabs nav-tabs-transparent">
-                  <li class="active"><a href="#home" data-toggle="tab">Login</a></li>
-                  <li><a href="#profile" data-toggle="tab">Register</a></li>
-                  <li><a href="#messages" data-toggle="tab">Recovery Pass</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
+            <div class="text-center title-logo animated fadeInDown animation-delay-5">Med<span>Save</span></div>
+            <div class="transparent-div animated fadeInUp animation-delay-8 panel">
+                <div class="panel-body">
                   <div class="tab-pane active" id="home">
                     <form role="form" id="login-form"  action="<c:url value='j_spring_security_check'/>" method="POST">
                         <div class="form-group">
@@ -72,7 +62,9 @@
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                <input id="j_password" name="j_password" type="password" class="form-control" placeholder="Sua senha">
                             </div>
-                            <button type="submit" class="btn btn-ar btn-primary pull-right">Login</button>
+                            <div id="login-buttons">
+	                            <button type="submit" class="btn btn-ar btn-primary pull-right">Entrar</button>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                     </form>
