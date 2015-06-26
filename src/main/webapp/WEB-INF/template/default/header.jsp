@@ -37,6 +37,9 @@
 		                    </form>
 		                </div>
 	 		 	</c:if>
+	 		 	<c:if test="${pageContext.request.userPrincipal != null}">
+	 		 		<a href='<c:url value="/j_spring_security_logout" />'><i class="fa fa-times"></i> Sair</a>
+	 		 	</c:if>
             </div> <!-- dropdown -->
 	 	</nav>
 	 	
