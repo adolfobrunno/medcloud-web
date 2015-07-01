@@ -107,5 +107,7 @@
 	            </div>
             </section>
 		</div>
+		
+		<script src="js/app.js" type="text/javascript"></script>
  	</tiles:putAttribute>
  </tiles:insertDefinition>

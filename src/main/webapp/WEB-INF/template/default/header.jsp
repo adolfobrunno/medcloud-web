@@ -5,7 +5,13 @@
 <header id="header-full-top" class="hidden-xs header-full">
 	 <div class="container">
 	 	<div class="header-full-title">
-	 		<h1 class="animated fadeInRight"><a href="index.html" id="title-link" class="active">Med<span>Save</span></a>
+	 		<h1 class="animated fadeInRight">
+	 			<c:if test="${pageContext.request.userPrincipal == null}">
+	 				<a href='<c:url value="/" />' id="title-link" class="active">Med<span>Save</span></a>
+	 			</c:if>
+	 			<c:if test="${pageContext.request.userPrincipal != null}">
+	 				<a href='<c:url value="/images" />' id="title-link" class="active">Med<span>Save</span></a>
+	 			</c:if>
 				<span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-circle"><i class="fa fa-cloud"></i></span>
 				<span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-circle"><i class="fa fa-folder-open"></i></span>
 				<span class="icon-ar icon-ar-inverse icon-ar-lg icon-ar-circle"><i class="fa fa-lock"></i></span>
