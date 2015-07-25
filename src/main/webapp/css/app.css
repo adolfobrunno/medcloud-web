@@ -44,10 +44,14 @@ header i{
 
 
 
-/* .header-full-title{ */
-/* 	background-image: url("../img/logo.jpg"); */
-/* } */
+.header-full-title{
+	background-image: none;
+}
 
-/* .services-header{ */
-/* 	background-image: url("../img/doctor01.jpg"); */
-/* } */
+.services-header{
+	background-image: url("../img/background.jpg");
+	background-position-x: -80px;
+	background-position-y: -75px;
+	width: 102%;
+	background-size: 107%;
+}

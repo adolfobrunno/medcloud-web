@@ -2,11 +2,11 @@
 <html>
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>MedCloud</title>
+    <title>MedSave</title>
     
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
-    <c:url value="" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
     <!-- Template CSS -->
     <link href='<c:url value="/tools/template/assets/css/preload.css"/>' rel="stylesheet" media="screen" />

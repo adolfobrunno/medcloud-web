@@ -30,7 +30,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-lock"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Segurança</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Dados criptografados, acessados através de uma conta única e intransferível com acesso liberado através de software ou usuário.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -39,7 +39,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-random"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Conectividade</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Integração com qualquer aparelho, modalidade ou software voltado para a saúde através de interfaces DICOM, API de integração, HL7 ou clientes de integração.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -48,7 +48,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-gears"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Agilidade</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Exames compartilhados e disponibilizados em ambiente digital para médicos, dentistas e pacientes, disponibilizado em tempo real.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -57,7 +57,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-dollar"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Economia</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Economia com a redução e eliminação de mídias impressas. Ambiente digital ecologicamente correto.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -73,7 +73,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-file"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Laudos</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Laudos em PDF, editor de texto, certificado digital, controle de versionamento, laudo via voz, envio de laudos via email e muito mais.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -82,7 +82,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-photo"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Imagens</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Imagens DICOM e JPEG, anexos, arquivos em resolução originais sem perda ou compactação de dados, visualizador e editor DICOM, visualizador mobile, player de áudio integrado com imagens, relatórios de imagens em PDF.</p>
 		                    </div>
 		                </div>
 		            </div>
@@ -91,7 +91,7 @@
 		                    <span class="icon-ar icon-ar-lg"><i class="fa fa-volume-up"></i></span>
 		                    <div class="text-icon-content">
 		                        <h3 class="no-margin">Voz</h3>
-		                        <p>Praesentium cumque voluptate harum quae doloribus, atque error debitis, amet velit in similique, necessitatibus odit vero sunt.</p>
+		                        <p>Integração com reconhecimento de voz, mensagem de voz, ditado digital web nativo integrado a qualquer equipamento, segunda opinião via voz integrado com imagens e laudos, player de voz e muito mais.</p>
 		                    </div>
 		                </div>
 		            </div>

@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}" scope="request"/>
+<input type="hidden" value="${ctx}" id="ctx" />
 <header id="header-full-top" class="hidden-xs header-full">
 	 <div class="container">
 	 	<div class="header-full-title">
