@@ -42,13 +42,31 @@ function createTree(){
 }
 
 function createTable(image){
+	console.log(image.length);
+	var dataset = new Array();
+	if(image.length > 1){
+		for ( var i in image) {
+			var data = [i.properties.iid, i.properties.modality, i.properties.cid,
+		            toDateFormat(i.properties.creation_date), i.properties.size + "KB"];
+			dataset.push(data);
+		}
+	}else{
+		var data = [image.properties.iid, image.properties.modality, image.properties.cid,
+		            toDateFormat(image.properties.creation_date), image.properties.size + "KB"];
+		dataset.push(data);
+	}
 	
-	$("#iid").text(image.properties.iid);
-	$("#modality").text(image.properties.modality);
-	$("#cid").text(image.properties.cid);
-	$("#size").text(image.properties.size + "KB");
-	$("#date").text(toDateFormat(image.properties.creation_date));
-	$("#imagePath").val(image.file64);
+	$("#imageList").dataTable({
+		"data": dataset,
+		"searching": false
+	});
+	
+//	$("#iid").text(image.properties.iid);
+//	$("#modality").text(image.properties.modality);
+//	$("#cid").text(image.properties.cid);
+//	$("#size").text(image.properties.size + "KB");
+//	$("#date").text(toDateFormat(image.properties.creation_date));
+//	$("#imagePath").val(image.file64);
 	
 	$("#table").show();
 	$("#message").hide();
@@ -56,7 +74,6 @@ function createTable(image){
 
 function toDateFormat(string){
 	
-	// 20151202
 	var y = string.substring(0, 4);
 	var m = string.substring(4, 6);
 	var d = string.substring(6);

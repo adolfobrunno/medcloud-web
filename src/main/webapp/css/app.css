@@ -16,6 +16,10 @@ header i{
 	text-align: left!important;
 }
 
+.header-full-title{
+	padding-left: 0px;
+}
+
 #footer-widgets{
 	background-color: #A69E9E;
 	color: #FFFFFF;	

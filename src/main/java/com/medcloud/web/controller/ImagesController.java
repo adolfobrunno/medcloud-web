@@ -40,7 +40,7 @@ public class ImagesController {
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String load(Model model, HttpServletRequest request){
-		
+		model.addAttribute("modalities", ImageType.values());
 		return "images_user";
 	}
 	
