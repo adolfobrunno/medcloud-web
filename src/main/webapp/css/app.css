@@ -59,3 +59,7 @@ header i{
 	width: 102%;
 	background-size: 107%;
 }
+
+.form-group{
+	padding-bottom: 10px;
+}
