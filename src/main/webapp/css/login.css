@@ -7,3 +7,8 @@
 #home{
 	padding-top: 30px;
 }
+
+.title-logo{
+	background-image: url("../img/logo220.png") !important;
+	padding-top: 152px;
+}

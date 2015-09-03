@@ -53,14 +53,20 @@
 	<mongo:db-factory dbname="${db.name}" />
  
  	<mongo:mapping-converter id="converter" />
- 
+ 	
 	<bean name="gridFsTemplate"
 		class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
 		<constructor-arg ref="mongoDbFactory" />
 		<constructor-arg ref="converter" />
 	</bean>
     
- 
+<!--  	<mongo:mapping-converter id="localdateconverter"> -->
+<!-- 	    <mongo:custom-converters> -->
+<!-- 	        <mongo:converter> -->
+<!-- 	            <bean class="com.medcloud.config.converters.DateToLocalDateConverter" /> -->
+<!-- 	        </mongo:converter> -->
+<!-- 	    </mongo:custom-converters> -->
+<!-- 	</mongo:mapping-converter> -->
  
 	<bean id="mongoTemplate" name="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />

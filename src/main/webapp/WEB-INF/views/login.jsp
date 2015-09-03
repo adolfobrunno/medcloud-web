@@ -46,7 +46,7 @@
 <div class="paper-back-full">
     <div class="login-form-full">
         <div class="fix-box">
-            <div class="text-center title-logo animated fadeInDown animation-delay-5">Med<span>Save</span></div>
+            <div class="text-center title-logo animated fadeInDown animation-delay-5"></div>
             <div class="transparent-div animated fadeInUp animation-delay-8 panel">
                 <div class="panel-body">
                   <div class="tab-pane active" id="home">

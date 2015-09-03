@@ -2,19 +2,61 @@
  * 
  */
 $(document).ready(function(){
+	createTree();
 	
-	$("#imageList tr").css("cursor", "pointer");
+	$(".date").mask("99/99/9999", {placeholder: "dd/mm/yyyy"})
 	
-    $("#imageList").delegate('tr', 'click', function() {
-    	var path = $("#imagePath").val();
-    	var image = new Image();
-    	image.src = "data:image/png;base64,"+path;
-    	$("#imageSrc").attr('src', image.src);
-    	$("#imageModal").modal('show');
+	var list = [];
+	
+	$("#imageList tr").css('cursor', 'pointer');
+    
+	$("#imageList").delegate('tbody tr', 'click', function() {
+    	
+    	$(this).toggleClass('success');
+    	if($(this).hasClass('success')){
+        	list.push($(this).attr('id'))
+    	}else{
+    		var index = list.indexOf($(this).attr('id'));
+    		if(index > -1){
+    			list.splice(index, 1)
+    		}
+    	}
+    	if(list.length > 0){
+    		$("#btn-download").show();
+    	}else{
+    		$("#btn-download").hide();
+    	}
     });
     
-    createTree();
+    $("#btn-download").click(function(e){
+    	e.preventDefault();
+    	var url = $("#ctx").val()+"/images/download/"+list;
+    	window.location.href = url;
+    });
     
+    $("#btn-go").click(function(e){
+    	e.preventDefault();
+    	var dto = new Object();
+    	dto.iid = $("#iid").val();
+    	dto.pid = $("#pid").val();
+    	dto.sid = $("#sid").val();
+    	dto.sno = $("#sno").val();
+    	dto.creationDateInit = formatDate($("#cd_init").val());
+    	dto.creationDateEnd = formatDate($("#cd_end").val());
+    	dto.modality = $("#modality option:selected").val();
+    	
+    	$.ajax({
+    	      type: "POST",
+    	      contentType : 'application/json; charset=utf-8',
+    	      dataType : 'json',
+    	      url: $("#ctx").val()+"/images/filter",
+    	      data: JSON.stringify(dto),
+    	      success :function(result) {
+    	    	  createTable(result);
+    	     }
+    	  });
+    	
+    });
 });
 
 function createTree(){
@@ -41,43 +83,46 @@ function createTree(){
 	});
 }
 
-function createTable(image){
-	console.log(image.length);
+function createTable(dto){
+	
+	$("#imageList").DataTable().destroy();
+	
 	var dataset = new Array();
-	if(image.length > 1){
-		for ( var i in image) {
-			var data = [i.properties.iid, i.properties.modality, i.properties.cid,
-		            toDateFormat(i.properties.creation_date), i.properties.size + "KB"];
-			dataset.push(data);
-		}
-	}else{
-		var data = [image.properties.iid, image.properties.modality, image.properties.cid,
-		            toDateFormat(image.properties.creation_date), image.properties.size + "KB"];
+	var images = dto.properties;
+	for ( var i in images) {
+		var data = [images[i].iid, images[i].modality, images[i].cid,
+		            toDateFormat(images[i].creation_date.iLocalMillis), images[i].size + "KB"];
 		dataset.push(data);
 	}
-	
+
 	$("#imageList").dataTable({
 		"data": dataset,
-		"searching": false
+		"createdRow": function( row, data, dataIndex ) {
+		    $(row).attr('id', data[0]);
+		},
+		"language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.8/i18n/Portuguese-Brasil.json"
+        }
 	});
-	
-//	$("#iid").text(image.properties.iid);
-//	$("#modality").text(image.properties.modality);
-//	$("#cid").text(image.properties.cid);
-//	$("#size").text(image.properties.size + "KB");
-//	$("#date").text(toDateFormat(image.properties.creation_date));
-//	$("#imagePath").val(image.file64);
 	
 	$("#table").show();
 	$("#message").hide();
 }
 
-function toDateFormat(string){
+function toDateFormat(millis){
+	var date = new Date(millis);
+	return date.customFormat("#DD#/#MM#/#YYYY#");
+}
+
+function formatDate(str){
 	
-	var y = string.substring(0, 4);
-	var m = string.substring(4, 6);
-	var d = string.substring(6);
-	
-	return d+'/'+m+'/'+y;
+	if(str.length > 0){
+		var array = str.split("/");
+		var day = array[0];
+		var month = array[1];
+		var year = array[2];
+		
+		return year+month+day;
+	}
 	
 }
